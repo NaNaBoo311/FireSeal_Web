@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/FireSeal_EmailConfirmPage/static/css/main.b233b219.css",
+    "main.js": "/FireSeal_EmailConfirmPage/static/js/main.fe0aee68.js",
+    "index.html": "/FireSeal_EmailConfirmPage/index.html",
+    "main.b233b219.css.map": "/FireSeal_EmailConfirmPage/static/css/main.b233b219.css.map",
+    "main.fe0aee68.js.map": "/FireSeal_EmailConfirmPage/static/js/main.fe0aee68.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b233b219.css",
+    "static/js/main.fe0aee68.js"
+  ]
+}
