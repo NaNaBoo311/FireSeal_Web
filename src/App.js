@@ -6,8 +6,8 @@ import "./App.css";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<EmailConfirm />} />
-      <Route path="/reset" element={<ResetPassword />} />
+      <Route path="/" element={<ResetPassword />} />
+      <Route path="/confirm" element={<EmailConfirm />} />
     </Routes>
   );
 }

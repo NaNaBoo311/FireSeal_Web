@@ -9,12 +9,35 @@ export default function ResetPassword() {
   const [message, setMessage] = useState("");
   const [canReset, setCanReset] = useState(false);
 
-  // Check if we have a recovery session from the URL
   useEffect(() => {
-    const hash = window.location.hash;
-    if (hash.includes("type=recovery")) {
-      setCanReset(true);
+    let hash = window.location.hash;
+
+    // Case: GitHub Pages + HashRouter → "#/#access_token=..."
+    if (hash.includes("#/")) {
+      const [, tokenPart] = hash.split("#/");
+      if (tokenPart.startsWith("access_token")) {
+        // Build new URL: "#/?access_token=..."
+        const newUrl =
+          window.location.origin + window.location.pathname + "#/?" + tokenPart;
+        window.history.replaceState(null, "", newUrl);
+      }
     }
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === "PASSWORD_RECOVERY") {
+        setCanReset(true);
+      }
+    });
+
+    supabase.auth.getSession().then(({ data }) => {
+      if (data.session) {
+        setCanReset(true);
+      }
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
   const handleReset = async (e) => {
@@ -30,8 +53,7 @@ export default function ResetPassword() {
       return;
     }
 
-    // Call Supabase to update password
-    const { data, error } = await supabase.auth.updateUser({
+    const { error } = await supabase.auth.updateUser({
       password: newPassword,
     });
 
