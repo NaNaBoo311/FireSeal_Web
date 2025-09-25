@@ -1,15 +1,18 @@
 import React from "react";
 import "./App.css";
-
+import EmailConfirm from "./pages/EmailConfirm";
+import ResetPassword from "./pages/ResetPassword";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 function App() {
   return (
-    <div className="container">
-      <div className="card">
-        <h1>🎉 Success!</h1>
-        <p>Your email has been confirmed and your account is ready.</p>
-      </div>
-    </div>
+    <Router>
+      {" "}
+      <Routes>
+        {" "}
+        <Route path="/" element={<EmailConfirm />} />{" "}
+        <Route path="/reset" element={<ResetPassword />} />{" "}
+      </Routes>{" "}
+    </Router>
   );
 }
-
 export default App;
